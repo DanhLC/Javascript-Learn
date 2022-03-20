@@ -29,7 +29,6 @@ function generateCat(){
 function rpsGame(choice) {
     var humanChoice, botChoice;
     humanChoice = choice.id;
-    console.log(choice);
     botChoice = randomNumberToChoice(randomNumber());
     result = decideWinner(humanChoice, botChoice);
     messageNotice = notificationMessage(result);
