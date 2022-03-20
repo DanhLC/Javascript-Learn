@@ -142,6 +142,10 @@ function changeButtonColor(buttonColor) {
     {
         resetColor();
     }
+    else
+    {
+        randomColor();
+    }
 }
 
 function changeColor (color) {
@@ -176,6 +180,11 @@ function resetColor() {
     }
 }
 
-function random() {
-    
+function randomColor() {
+    let randonChoice = ['btn-danger', 'btn-success', 'btn-primary', 'btn-warning'];
+    for (let index = 0; index < allButton.length; index++) {
+        let randomNumber = Math.floor(Math.random() * 4);
+        allButton[index].classList.remove(allButton[index].classList[1]);
+        allButton[index].classList.add(randonChoice[randomNumber]);
+    }
 }
