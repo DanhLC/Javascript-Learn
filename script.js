@@ -1,6 +1,8 @@
 // Challenge 1
 
 function calculateYear(){
+    if (document.getElementById('age')) document.getElementById('age').remove();
+
     var inputYear = prompt("What's year you were born?");
     var calculateYear = (new Date().getFullYear()) - parseInt(inputYear);
     var h1CreateElement = document.createElement('h1');
@@ -21,7 +23,6 @@ function generateCat(){
     var div = document.getElementById('flex-box-cat-generate');
     img.src = "https://c.tenor.com/ZhfMGWrmCTcAAAAM/cute-kitty-best-kitty.gif";
     div.appendChild(img);
-    console.log(div)
 }
 
 // Challenge 3
@@ -29,7 +30,7 @@ function generateCat(){
 function rpsGame(choice) {
     var humanChoice, botChoice;
     humanChoice = choice.id;
-    botChoice = randomNumberToChoice(randomNumber());
+    botChoice = randomChoice(randomNumber());
     result = decideWinner(humanChoice, botChoice);
     messageNotice = notificationMessage(result);
     rpsDisplay(humanChoice, botChoice, messageNotice);
@@ -39,7 +40,7 @@ function randomNumber() {
     return Math.floor(Math.random()*3);
 }
 
-function randomNumberToChoice(number){
+function randomChoice(number){
     return ['rock', 'paper', 'scissors'][number]
 }
 
@@ -50,7 +51,6 @@ function decideWinner(humanChoice, botChoice) {
         'scissors': {'paper': 1, 'scissors': 0.5, 'rock': 0}
     };
 
-    console.log(rpsData['rock']);
     var humanScore = rpsData [humanChoice][botChoice];
     var botScore = rpsData [botChoice][humanChoice];
 
@@ -87,7 +87,6 @@ function rpsDisplay(humanChoice, botChoice, notificationMessage) {
         'scissors': document.getElementById('scissors').src
     };
 
-    console.log(image);
     document.getElementById('rock').remove();
     document.getElementById('paper').remove();
     document.getElementById('scissors').remove();
@@ -101,7 +100,7 @@ function rpsDisplay(humanChoice, botChoice, notificationMessage) {
     messageDiv.innerHTML = "<h1 style='color: "+ notificationMessage['color'] +";font-size: 60px; padding: 30px'>" + notificationMessage['message'] + "</h1>";
 
     botDiv.innerHTML = "<img src='"+ image[botChoice]+"' height=150 width=150 style='box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);'/>";
-    console.log(messageDiv);
+
     document.getElementById('flex-box-rps-div').appendChild(humanDiv);
     document.getElementById('flex-box-rps-div').appendChild(messageDiv);
     document.getElementById('flex-box-rps-div').appendChild(botDiv);
@@ -116,7 +115,7 @@ function retry() {
 var allButton = document.getElementsByTagName('button');
 
 var copyAllButton = [];
-for (let index = 0; index < allButton.length; index++) {
+for (var index = 0; index < allButton.length; index++) {
     copyAllButton.push(allButton[index].classList[1]);
 }
 
@@ -166,24 +165,79 @@ function changeColor (color) {
             break;
     }
 
-    for (let index = 0; index < allButton.length; index++) {
+    for (var index = 0; index < allButton.length; index++) {
         allButton[index].classList.remove(allButton[index].classList[1]);
         allButton[index].classList.add(buttonClass);
     }
 }
 
 function resetColor() {
-    for (let index = 0; index < allButton.length; index++) {
+    for (var index = 0; index < allButton.length; index++) {
         allButton[index].classList.remove(allButton[index].classList[1]);
         allButton[index].classList.add(copyAllButton[index]);
     }
 }
 
 function randomColor() {
-    let randonChoice = ['btn-danger', 'btn-success', 'btn-primary', 'btn-warning'];
-    for (let index = 0; index < allButton.length; index++) {
-        let randomNumber = Math.floor(Math.random() * 4);
+    var randonChoice = ['btn-danger', 'btn-success', 'btn-primary', 'btn-warning'];
+    for (var index = 0; index < allButton.length; index++) {
+        var randomNumber = Math.floor(Math.random() * 4);
         allButton[index].classList.remove(allButton[index].classList[1]);
         allButton[index].classList.add(randonChoice[randomNumber]);
     }
+}
+
+// Challenge 5
+
+var blackjackGameInfo = {
+    "you": {"spScore": "#your-blackjack-result", "div": "#your-box", "score" : 0},
+    "dealer": {"spScore": "#dealer-blackjack-result", "div": "#dealer-box", "score" : 0},
+    "cards": ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"],
+    "cardsMap": {"2" : 2, "3" : 3, "4" : 4, "5" : 5, "6" : 6, "7" : 7, "8": 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10, "K" : 10, "A" : [1, 11]}
+};
+
+const you = blackjackGameInfo["you"];
+const dealer = blackjackGameInfo["dealer"];
+const cards = blackjackGameInfo["cards"];
+const hitSound = new Audio("static/sounds/switch.m4a");
+
+document.querySelector('#blackjack-hit-button').addEventListener('click', blackjackHit);
+document.querySelector('#blackjack-stand-button').addEventListener('click', blackjackStand);
+document.querySelector('#blackjack-deal-button').addEventListener('click', blackjackDeal);
+
+function blackjackHit() {
+    var cardDeal = randomCard();
+    console.log(cardDeal);
+    showCard(cardDeal, you);
+    showCard(cardDeal, dealer);
+}
+
+function showCard(cardDeal, activePlayer) {
+    var cardImage = document.createElement('img');
+    cardImage.src = `static/images/${cardDeal}.jpg`;
+    document.querySelector(activePlayer['div']).appendChild(cardImage);
+    hitSound.play();
+}
+
+function blackjackStand() {
+}
+
+function blackjackDeal() {
+    var yourCardImages = document.querySelector('#your-box').querySelectorAll('img');
+    var dealerCardImages = document.querySelector('#dealer-box').querySelectorAll('img');
+
+    for(var index = 0; index <yourCardImages.length; index ++)
+    {
+        yourCardImages[index].remove();
+    }
+
+    for(var index = 0; index <dealerCardImages.length; index ++)
+    {
+        dealerCardImages[index].remove();
+    }
+}
+
+function randomCard() {
+    var randomIndex= Math.floor(Math.random() * 13);
+    return cards[randomIndex];
 }
