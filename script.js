@@ -120,19 +120,23 @@ for (var index = 0; index < allButton.length; index++) {
 }
 
 function changeButtonColor(buttonColor) {
-    if (buttonColor.value == 'red') 
+    if ((buttonColor.value == 'red') 
+        || (buttonColor == 'red' ))
     {
         changeColor('red');
     }
-    else if (buttonColor.value == 'green')
+    else if ((buttonColor.value == 'green')
+        || (buttonColor == 'green' ))
     {
         changeColor('green');
     }
-    else if (buttonColor.value == 'blue')
+    else if ((buttonColor.value == 'blue')
+        || (buttonColor == 'blue' ))
     {
         changeColor('blue');
     }
-    else if (buttonColor.value == 'yellow')
+    else if ((buttonColor.value == 'yellow')
+        || (buttonColor == 'yellow' ))    
     {
         changeColor('yellow');
     }
