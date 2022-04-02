@@ -207,6 +207,7 @@ const cards = blackjackGameInfo["cards"];
 const hitSound = new Audio("static/sounds/switch.m4a");
 const winSound = new Audio("static/sounds/cash.mp3");
 const loseSound = new Audio("static/sounds/aww.mp3");
+const drawSound = new Audio("static/sounds/small-crowd-laugh-and-applause.mp3");
 
 document.querySelector('#blackjack-hit-button').addEventListener('click', blackjackHit);
 document.querySelector('#blackjack-stand-button').addEventListener('click', dealerLogic);
@@ -378,6 +379,7 @@ function showResult(winner) {
             document.querySelector("#draws").textContent = blackjackGameInfo["draws"];
             message = "You draw";
             color = "black";
+            drawSound.play();
         }
 
         document.querySelector("#blackjack-result").textContent = message;
