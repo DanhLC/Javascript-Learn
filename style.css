@@ -3,7 +3,8 @@
 .flex-box-pick-color,
 .flex-blackjack-row-1,
 .flex-blackjack-row-2,
-.flex-blackjack-row-3 {
+.flex-blackjack-row-3,
+.flex-blackjack-row-4 {
     display: flex;
     border: 1px solid black;
     padding: 10px;
@@ -88,4 +89,9 @@
 .flex-blackjack-row-2 div {
     border: 1px solid black;
     padding: 10px;
+}
+
+.flex-blackjack-row-4 span {
+    color: green;
+    font-size: 30px;
 }

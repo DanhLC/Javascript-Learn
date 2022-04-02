@@ -201,6 +201,7 @@ var blackjackGameInfo = {
     "wins" : 0,
     "loses" : 0,
     "draws" : 0,
+    "moneys" : 5000,
     "isStand" : false,
     "turnOver" : false
 };
@@ -254,7 +255,7 @@ function blackjackDeal() {
         you['score'] = 0;
         dealer['score'] = 0;
         document.querySelector("#your-blackjack-result").textContent = 0;
-        document.querySelector("#dealer-blackjack-result").textContent = 0
+        document.querySelector("#dealer-blackjack-result").textContent = 0;
         document.querySelector("#blackjack-result").textContent = "Let's play";
 
         document.querySelector("#your-blackjack-result").style.color = "#fff";
@@ -332,11 +333,13 @@ function botWinner() {
                 || (dealer['score'] > 21))
             {
                 blackjackGameInfo["wins"] ++;
+                blackjackGameInfo["moneys"] += 300;
                 winner = you;
             }
             else if (you['score'] < dealer['score'])
             {
                 blackjackGameInfo["loses"] ++;
+                blackjackGameInfo["moneys"] -= 300;
                 winner = dealer;
             }
             else if (you['score'] === dealer['score'])
@@ -348,6 +351,7 @@ function botWinner() {
             && (dealer['score'] <=21))
         {
             blackjackGameInfo["loses"] ++;
+            blackjackGameInfo["moneys"] -= 300;
             winner = dealer;
         }
         else if ((you['score'] > 21)
@@ -367,6 +371,7 @@ function showResult(winner) {
         if (winner === you)
         {
             document.querySelector("#wins").textContent = blackjackGameInfo["wins"];
+            document.querySelector("#moneys").textContent = blackjackGameInfo["moneys"] + "$";
             message = "You won";
             color = "green";
             winSound.play();
@@ -374,6 +379,7 @@ function showResult(winner) {
         else if (winner === dealer)
         {
             document.querySelector("#loses").textContent = blackjackGameInfo["loses"];
+            document.querySelector("#moneys").textContent = blackjackGameInfo["moneys"] + "$";
             message = "You lost";
             color = "red";
             loseSound.play();
