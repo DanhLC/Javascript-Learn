@@ -256,7 +256,7 @@ function blackjackDeal() {
         document.querySelector("#dealer-blackjack-result").style.color = "#fff";
         document.querySelector("#blackjack-result").style.color = "black";
 
-        blackjackGameInfo['turnOver'] = true;
+        blackjackGameInfo['turnOver'] = false;
     }
 }
 
@@ -294,21 +294,29 @@ function showScore(activePlayer) {
     }
 }
 
-function dealerLogic() {
-    blackjackGameInfo['isStand'] = true;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve,ms));
+}
 
-    while ((dealer['score'] < 16)
-        && (blackjackGameInfo['isStand'] === true))
+async function dealerLogic() {
+    if (blackjackGameInfo['turnOver'] === false)
     {
-        let cardDeal = randomCard();
-        showCard(cardDeal, dealer);
-        updateScore(cardDeal, dealer);
-        showScore(dealer);
-    }
+        blackjackGameInfo['isStand'] = true;
 
-    blackjackGameInfo['turnOver'] = true;
-    var winner = botWinner();
-    showResult(winner);
+        while ((dealer['score'] < 16)
+            && (blackjackGameInfo['isStand'] === true))
+        {
+            let cardDeal = randomCard();
+            showCard(cardDeal, dealer);
+            updateScore(cardDeal, dealer);
+            showScore(dealer);
+            await sleep(1000);
+        }
+
+        blackjackGameInfo['turnOver'] = true;
+        var winner = botWinner();
+        showResult(winner);
+    }
 }
 
 function botWinner() {
