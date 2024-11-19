@@ -396,3 +396,142 @@ function showResult(winner) {
         document.querySelector("#blackjack-result").style.color = color;
     }
 }
+
+/**
+ * 
+ * @param {*} task 
+ * @param {*} callback 
+ */
+// function doTask(task, callback) {
+//     console.log(`Doing ${task}...`);
+//     callback();
+// }
+
+// doTask("homework", function() {
+//     console.log("Task completed!");
+// });
+
+// promise
+// function fetchData() {
+//     return new Promise((resolve, reject) => {
+//         let success = true;
+//         setTimeout(() => {
+//             if (success) {
+//                 resolve("Data fetched successfully!");
+//             } else {
+//                 reject("Failed to fetch data!");
+//             }
+//         }, 1000);
+//     });
+// }
+
+// fetchData()
+//     .then((data) => console.log(data))
+//     .catch((error) => console.error(error));
+
+//async/await
+// async function fetchData() {
+//     let success = true;
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             if (success) {
+//                 resolve("Data fetched successfully!");
+//             } else {
+//                 reject("Failed to fetch data!");
+//             }
+//         }, 1000);
+//     });
+// }
+
+// async function getData() {
+//     try {
+//         const data = await fetchData();
+//         console.log(data);
+
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+
+// getData();
+
+// closure
+// var createCounter = function(n) {
+//     return function() {
+//         return n++;    
+//     };
+// };
+
+// const counter = createCounter(-2);
+// console.log(counter())
+
+// var expect = function(val) {
+//     return {
+//         toBe(value)
+//         {
+//            if (val === value) return true;
+//            else throw new Error("Not Equal");
+//         },
+//         notToBe(value)
+//         {
+//             if (val !== value) return true;
+//             else throw new Error("Equal");
+//         }
+//     }
+// };
+
+// console.log(expect(5).notToBe(5));
+
+// var createCounter = function(init) {
+//     let initValue = init;
+
+//     function increment()
+//     {
+//         return ++init;
+//     }
+
+//     function decrement()
+//     {
+//         return --init;
+//     }
+//     function reset()
+//     {
+//         init = initValue;
+//         return initValue;
+//     }
+
+//     return { increment, decrement, reset }
+// };
+
+// const counter = createCounter(5);
+// console.log(counter.increment());
+// console.log(counter.reset());
+// console.log(counter.decrement());
+
+// var map = function(arr, fn) {
+//     const transformedArr = [];
+//     arr.forEach(function(currentValue, i){
+//         transformedArr[i] = fn(currentValue, i);
+//     })
+//     return transformedArr;
+// };
+
+//   console.log(map([1,2,3], function plusone(n) { return n + 1; }))
+
+// var filter = function(arr, fn) {
+//     const filteredArr = [];
+//     for(let i in arr)
+//     {
+//         if (fn(arr[i], i)) filteredArr.push(arr[i])
+//     }
+
+//     return filteredArr;
+// };
+
+// console.log(filter([0,10,20,30], function greaterThan10(n) { return n > 10; }));
+
+// function reduce(nums, fn, init) {
+//     return nums.reverse().reduceRight((index, value) => fn(index, value), init);
+// }
+
+// console.log(reduce( [1,2,3,4], function sum(accum, curr) { return accum + curr; }, 0))
