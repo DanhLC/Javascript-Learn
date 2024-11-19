@@ -535,3 +535,119 @@ function showResult(winner) {
 // }
 
 // console.log(reduce( [1,2,3,4], function sum(accum, curr) { return accum + curr; }, 0))
+
+// var compose = function(functions) {
+//     return function(x) {
+//         return functions.reduceRight((acc, fn) => fn(acc), x);
+//     }
+// };
+
+// console.log(compose([x => 10 * x, x => 10 * x, x => 10 * x])(1))
+
+// var once = function(fn) {
+//     let called = false;
+    
+//     return function(...args){
+//         if (called) return undefined;
+
+//         called = true;
+//         return fn(...args)
+//     }
+// };
+
+// let fn = (a,b,c) => (a + b + c)
+// let onceFn = once(fn)
+// console.log(onceFn(1,2,3));
+// console.log(onceFn(2,3,6));
+
+// function memoize(fn) {
+//     const cache = new Map();
+
+//     return function(...args) {
+//         const key = JSON.stringify(args);
+
+//         if (cache.has(key)) return cache.get(key);
+
+//         const result = fn(...args);
+//         cache.set(key, result);
+//         return result;
+//     };
+// }
+
+// const sum = (a, b) => a + b;
+
+// const fib = (n) => {
+//     if (n <= 1) return 1;
+//     return fib(n - 1) + fib(n - 2);
+// };
+
+// const factorial = (n) => {
+//     if (n <= 1) return 1;
+//     return factorial(n - 1) * n;
+// };
+
+// const memoizedSum = memoize(sum);
+// const memoizedFib = memoize(fib);
+// const memoizedFactorial = memoize(factorial);
+
+// console.log(memoizedSum(3, 2)); 
+// console.log(memoizedSum(2, 3));
+// console.log(memoizedSum(3, 2)); 
+
+// console.log(memoizedFib(10));
+// console.log(memoizedFactorial(5));
+
+//promise
+// function addTwoPromises(promise1, promise2) {
+//     return Promise.all([promise1, promise2])
+//         .then(([value1, value2]) => value1 + value2);
+// }
+
+// addTwoPromises(Promise.resolve(2), Promise.resolve(2))
+//     .then(console.log);
+
+// async function sleep(millis) {
+//     return new Promise((resolve, reject) => {
+//                 setTimeout(() => {
+//                     resolve(millis);
+//                 }, millis);
+//             });
+// }
+
+// let t = Date.now();
+// sleep(1000).then(() => {
+//   console.log(Date.now() - t);
+// });
+
+// var cancellable= function(fn, args, t) {
+//     const timer = setTimeout(() => {
+//         fn(...args);
+//     }, t);
+
+//     return function cancelFn() {
+//         clearTimeout(timer);
+//     };
+// }
+
+// const result = [];
+ 
+//  const fn = (x) => x * 5;
+//  const args = [2], t = 20, cancelTimeMs = 50;
+ 
+//  const start = performance.now();
+ 
+//  const log = (...argsArr) => {
+//      const diff = Math.floor(performance.now() - start);
+//      result.push({"time": diff, "returned": fn(...argsArr)});
+//  }
+      
+//  const cancel = cancellable(log, args, t);
+ 
+//  const maxT = Math.max(t, cancelTimeMs);
+          
+//  setTimeout(cancel, cancelTimeMs);
+ 
+//  setTimeout(() => {
+//      console.log(result);
+//      console.log("Excute cancelled")
+//  }, maxT + 15)
